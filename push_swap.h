@@ -2,22 +2,22 @@
 // TODO: atoi errno deve essere 0 (=false) alla fine
 #define ATOI_ERRNO 17
 
-void parse_args(int ac, char **av, t_stack **a);
+void	parse_args(int ac, char **av, t_stack **a);
 
 // stack a
-void sa(t_stack **a);
-void ra(t_stack **a);
-void rra(t_stack **a);
+void	sa(t_stack **a);
+void	ra(t_stack **a);
+void	rra(t_stack **a);
 // stack b
-void sb(t_stack **b);
-void rb(t_stack **b);
-void rrb(t_stack **b);
+void	sb(t_stack **b);
+void	rb(t_stack **b);
+void	rrb(t_stack **b);
 // combined
-void ss(t_stack **a, t_stack **b);
-void rr(t_stack **a, t_stack **b);
-void rrr(t_stack **a, t_stack **b);
-void pa(t_stack **a, t_stack **b);
-void pb(t_stack **a, t_stack **b);
+void	ss(t_stack **a, t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b);
+void	pb(t_stack **a, t_stack **b);
 
 /*
 * functions:
@@ -35,13 +35,20 @@ void pb(t_stack **a, t_stack **b);
 */
 
 // utils
-void swap_stack(t_stack **stack);
-void push_stack(t_stack **to, t_stack **from);
-void rotate_stack(t_stack **stack);
-void reverse_rotate_stack(t_stack **stack);
-int atoi_checked(const char *str, int *errno);
+// todo: return int if actually performed a move
+// int		is_num(char *str);
+int		atoi_checked(const char *str, int *errno);
+void	swap_stack(t_stack **stack);
+void	push_stack(t_stack **from, t_stack **to);
+void	rotate_stack(t_stack **stack);
+void	reverse_rotate_stack(t_stack **stack);
 
-// main sorting
-int *median_3(t_stack *stack, int low, int high);
-void partition(t_stack **a, t_stack **b, int low, int high);
-void quick_sort(t_stack **a, t_stack **b, int low, int high);
+// sorting
+int		get_max_bits(int size);
+void	push_swap(t_stack **a, t_stack **b);
+void	radix_sort_indices(t_stack **a, t_stack **b);
+void	check_duplicates(t_stack *stack);
+
+// int *median_3(t_stack *stack, int low, int high);
+// void partition(t_stack **a, t_stack **b, int low, int high);
+// void quick_sort(t_stack **a, t_stack **b, int low, int high);

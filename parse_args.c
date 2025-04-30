@@ -9,33 +9,36 @@ static char f(unsigned int i, char c);
 void    parse_args(int ac, char **av, t_stack **a)
 {
     int i;
-    int *num;
+    t_stacknode *num;
 
-    i = 1;
-    while (i < ac)
+    i = ac - 1;
+    while (i >= 1)
     {
-        printf("\n");
         if (is_num(av[i]) && ac >= 2)
         {
-            num = (int*)malloc(sizeof(int));
+            // TODO: transform into s_node
+            num = (t_stacknode *)malloc(sizeof(t_stacknode));
             if (!num)
             {
-                printf("Error\n");
-                free(num);
+                ft_printf("Error\n");
+                free_stack(a);
+                free(*a);
                 exit(-1);
             }
-            *num = ft_atoi(av[i]);
+            num->value = ft_atoi(av[i]);
             push(a, num);
-            i++;
+            i--;
         }
         else
         {
-            // ft_printf("Error\n");
-            printf("Error\n");
-            free(num);
+            ft_printf("Error\n");
+            free_stack(a);
+            free(*a);
             exit(-1);
         }
+        // printf("\n");
     }
+    // check_duplicates(*a);
 }
 
 // validate length
@@ -44,16 +47,12 @@ void    parse_args(int ac, char **av, t_stack **a)
 
 static int  is_num(char *str)
 {
-    printf("cls\t");
     if (!check_len_sign(str))
         return (0);
-    printf("cn\t");
     if (!check_number(str))
         return (0);
-    printf("co\t");
     if (!check_overflow(str))
         return (0);
-    printf("all");
     return (1);
 }
 
@@ -82,7 +81,6 @@ static int  check_overflow(char *str)
     int err;
 
     num = atoi_checked(str, &err);
-    printf("num: %d, errno: %d\t", num, err);
     if (err == ATOI_ERRNO)
         return (0);
     return (1);
@@ -101,7 +99,6 @@ static int  check_len_sign(char *str)
     int len;
 
     len = ft_strlen(str);
-    printf("len: %d\t", len);
     if (len > 10)
     {
         if (len > 11 && (str[0] == '-' || str[0] == '+'))

@@ -22,13 +22,13 @@ int	atoi_checked(const char *str, int *errno)
 	{
 		numero = numero * 10 + (*str - '0');
 		if (numero < 0 && numero != INT_MIN)
-        {
-            *errno = ATOI_ERRNO;
-            return (0);
-        }
-        str++;
+		{
+			*errno = ATOI_ERRNO;
+			return (0);
+		}
+		str++;
 	}
-    *errno = 0;
+	*errno = 0;
 	return (numero * segno);
 }
 
