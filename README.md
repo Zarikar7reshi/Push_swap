@@ -1,1 +1,1 @@
-Dependencies: printf
+Dependencies: printf, libc
