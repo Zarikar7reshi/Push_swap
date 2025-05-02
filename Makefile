@@ -4,9 +4,10 @@ NAME = push_swap
 
 DEPS = push_swap.h stack.h
 
-SRC = push_swap.c a.c b.c c.c\
+SRC = push_swap.c a.c b.c c.c is_num.c \
 atoi_checked.c parse_args.c push_swap_utils.c \
-sorting_utils.c stack.c stack_utils.c
+sorting_utils.c stack.c stack_utils.c \
+sorting.c stack_nodes.c small_sort.c
 
 OBJS = $(SRC:.c=.o)
 
