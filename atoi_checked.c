@@ -6,7 +6,7 @@
 /*   By: sabruma <sabruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:28:03 by sabruma           #+#    #+#             */
-/*   Updated: 2025/05/05 10:58:03 by sabruma          ###   ########.fr       */
+/*   Updated: 2025/05/05 11:06:39 by sabruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int			atoi_checked(const char *str, int *errno);
 static int	ft_isspace(int c);
+static int	check_overflow(int result, int digit, int sign, int *errno);
 
 int	atoi_checked(const char *str, int *errno)
 {
@@ -22,26 +23,32 @@ int	atoi_checked(const char *str, int *errno)
 
 	segno = 1;
 	numero = 0;
+	*errno = 0;
+
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
+		if (*str++ == '-')
 			segno = -1;
-		str++;
-	}
 	while (ft_isdigit(*str))
 	{
-		if (numero < 0 && numero != INT_MIN)
-		{
-			*errno = ATOI_ERRNO;
+		if (check_overflow(numero, *str - '0', segno, errno))
 			return (0);
-		}
 		numero = numero * 10 + (*str - '0');
 		str++;
 	}
-	*errno = 0;
 	return (numero * segno);
+}
+
+static int	check_overflow(int result, int digit, int sign, int *errno)
+{
+	if (sign == 1 && result > (INT_MAX - digit) / 10)
+		*errno = ATOI_ERRNO;
+	else if (sign == -1 && result > (-(INT_MIN + digit)) / 10)
+		*errno = ATOI_ERRNO;
+	else
+		return 0;
+	return 1;
 }
 
 static int	ft_isspace(int c)
