@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atoi_checked.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 10:28:03 by sabruma           #+#    #+#             */
+/*   Updated: 2025/05/05 10:58:03 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int			atoi_checked(const char *str, int *errno);
@@ -20,12 +32,12 @@ int	atoi_checked(const char *str, int *errno)
 	}
 	while (ft_isdigit(*str))
 	{
-		numero = numero * 10 + (*str - '0');
 		if (numero < 0 && numero != INT_MIN)
 		{
 			*errno = ATOI_ERRNO;
 			return (0);
 		}
+		numero = numero * 10 + (*str - '0');
 		str++;
 	}
 	*errno = 0;
